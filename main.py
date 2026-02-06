@@ -16,7 +16,7 @@ class ResearchResponse(BaseModel):
     tools_used: list[str]
     
 
-llm = ChatAnthropic(model="claude-3-5-sonnet-20241022")
+llm = ChatAnthropic(temperature=0, model="claude-sonnet-4-5-20250929")
 parser = PydanticOutputParser(pydantic_object=ResearchResponse)
 
 prompt = ChatPromptTemplate.from_messages(
@@ -50,4 +50,5 @@ try:
     structured_response = parser.parse(raw_response.get("output")[0]["text"])
     print(structured_response)
 except Exception as e:
+
     print("Error parsing response", e, "Raw Response - ", raw_response)
